@@ -7,16 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IdentityLayer\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SolvexTechnicalTest.Core.Application\SolvexTechnicalTest.Core.Application.csproj" />
+    <ProjectReference Include="..\SolvexTechnicalTest.Infraestructe.Identity\SolvexTechnicalTest.Infraestructe.Identity.csproj" />
     <ProjectReference Include="..\SolvexTechnicalTest.Infraestructure.Persistence\SolvexTechnicalTest.Infraestructure.Persistence.csproj" />
   </ItemGroup>
 

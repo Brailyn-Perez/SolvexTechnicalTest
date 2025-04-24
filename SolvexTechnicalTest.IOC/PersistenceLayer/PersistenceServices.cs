@@ -7,7 +7,7 @@ using SolvexTechnicalTest.Infraestructure.Persistence.Repositories;
 
 namespace SolvexTechnicalTest.IOC.PersistenceLayer
 {
-    public static class PersistenceServices
+    public static class IdentityServices
     {
         public static void AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {

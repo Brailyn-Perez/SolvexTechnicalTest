@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SolvexTechnicalTest.Core.Application.Assemblies;
 using SolvexTechnicalTest.Core.Application.Behaviours;
+using SolvexTechnicalTest.Core.Application.Interfaces.Services.ReadsServices;
+using SolvexTechnicalTest.Core.Application.Services;
 
 namespace SolvexTechnicalTest.IOC.ApplicationLayer
 {
@@ -14,6 +16,8 @@ namespace SolvexTechnicalTest.IOC.ApplicationLayer
             services.AddValidatorsFromAssembly(typeof(AssemblyReference).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AssemblyReference).Assembly));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+            services.AddTransient<IColorReadService, ColorReadService>(); 
         }
     }
 }
