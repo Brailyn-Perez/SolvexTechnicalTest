@@ -2,6 +2,8 @@
 using SolvexTechnicalTest.Core.Application.Features.Color.Commands.CreateColorCommand;
 using SolvexTechnicalTest.Core.Application.Features.Color.Commands.DeleteColorCommand;
 using SolvexTechnicalTest.Core.Application.Features.Color.Commands.UpdateColorCommand;
+using SolvexTechnicalTest.Core.Application.Features.Color.Queries.GetAllColor;
+using SolvexTechnicalTest.Core.Application.Features.Color.Queries.GetColorById;
 
 namespace SolvexTechnicalTest.Presentation.WebApi.Controllers.v1
 {
@@ -31,6 +33,23 @@ namespace SolvexTechnicalTest.Presentation.WebApi.Controllers.v1
                 return BadRequest();
 
             return Ok(await Mediator.Send(command));
+        }
+        #endregion
+
+        #region Queries 
+        [HttpGet]
+        public async Task<IActionResult> GetAllColor()
+        {
+            return Ok(await Mediator.Send(new GetAllColorQuery()));
+        }
+
+        [ HttpGet("{id}")]
+        public async Task<IActionResult> GetColorById(int id)
+        {
+            var query = new GetColorByIdQuery();
+            query.Id = id;
+
+            return Ok(await Mediator.Send(query));
         }
         #endregion
     }

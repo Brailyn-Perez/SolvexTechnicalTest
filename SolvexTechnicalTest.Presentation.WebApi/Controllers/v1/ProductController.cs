@@ -2,6 +2,8 @@
 using SolvexTechnicalTest.Core.Application.Features.Product.Commands.CreateProductCommand;
 using SolvexTechnicalTest.Core.Application.Features.Product.Commands.DeleteProductCommand;
 using SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateProductCommand;
+using SolvexTechnicalTest.Core.Application.Features.Product.Queries.GetAllProduct;
+using SolvexTechnicalTest.Core.Application.Features.Product.Queries.GetProductById;
 
 namespace SolvexTechnicalTest.Presentation.WebApi.Controllers.v1
 {
@@ -26,6 +28,23 @@ namespace SolvexTechnicalTest.Presentation.WebApi.Controllers.v1
         public async Task<IActionResult> PutProduct(int id, UpdateProductCommand command)
         {
             return Ok(await Mediator.Send(command));
+        }
+        #endregion
+
+        #region Queries 
+        [HttpGet]
+        public async Task<IActionResult> GetAllProduct()
+        {
+            return Ok(await Mediator.Send(new GetAllProductQuery()));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProductById(int id)
+        {
+            var query = new GetProductByIdQuery();
+            query.Id = id;
+
+            return Ok(await Mediator.Send(query));
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using SolvexTechnicalTest.Core.Application.Common;
 
 namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.CreateColorCommand
 {
@@ -16,7 +17,8 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.CreateCol
                 .NotEmpty().WithMessage("the hexcode cannot be empty")
                 .NotNull().WithMessage("the hexcode cannot be null")
                 .MaximumLength(7).WithMessage("the minimum is 7 characters")
-                .MinimumLength(7).WithMessage("the minimum is 7 characters");
+                .MinimumLength(7).WithMessage("the minimum is 7 characters")
+                .ValidHexCode();
 
             RuleFor(p => p.Price)
                 .NotEmpty().WithMessage("the price cannot be empty")

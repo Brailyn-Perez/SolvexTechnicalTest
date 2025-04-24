@@ -27,6 +27,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.UpdateCol
         public async Task<Response<int>> Handle(UpdateColorCommand request, CancellationToken cancellationToken)
         {
             var record = await _repository.GetByIdAsync(request.Id);
+
             if (record == null)
             {
                 throw new KeyNotFoundException("Color not found");

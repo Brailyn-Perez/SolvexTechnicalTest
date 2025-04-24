@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using SolvexTechnicalTest.Core.Application.Common;
 
 namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateProductCommand
 {
@@ -22,7 +23,8 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
 
             RuleFor(d => d.ImageUrl)
                 .MaximumLength(250).WithMessage("the maximum is 250 characters")
-                .MinimumLength(0).WithMessage("the minimum is 0 characters");
+                .MinimumLength(0).WithMessage("the minimum is 0 characters")
+                .ValidImageUrl();
         }
     }
 }

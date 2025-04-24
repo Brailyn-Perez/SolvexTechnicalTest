@@ -27,6 +27,11 @@ namespace SolvexTechnicalTest.Infraestructure.Persistence.Base
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+           return await _context.Set<T>().AnyAsync(e => e.Id == id);
+        }
+
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();

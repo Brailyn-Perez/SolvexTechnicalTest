@@ -6,7 +6,10 @@ using SolvexTechnicalTest.Core.Domain.Repositories;
 
 namespace SolvexTechnicalTest.Core.Application.Features.Color.Queries.GetColorById
 {
-    public class GetColorByIdQuery : IRequest<Response<ColorDTO>>{}
+    public class GetColorByIdQuery : IRequest<Response<ColorDTO>>
+    {
+        public int Id { get; set; }
+    }
 
     public class GetColorByIdQueryHandler : IRequestHandler<GetColorByIdQuery, Response<ColorDTO>>
     {
@@ -19,9 +22,11 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Queries.GetColorBy
             _mapper = mapper;
         }
 
-        public Task<Response<ColorDTO>> Handle(GetColorByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<ColorDTO>> Handle(GetColorByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var record = await _repository.GetByIdAsync(request.Id);
+            var newRecord = _mapper.Map<ColorDTO>(record);
+            return new Response<ColorDTO>(newRecord);
         }
     }
 }

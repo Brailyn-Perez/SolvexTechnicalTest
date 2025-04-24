@@ -19,9 +19,11 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Queries.GetAllPr
             _mapper = mapper;
         }
 
-        public Task<Response<List<ProductDTO>>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<ProductDTO>>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var listrecord = await _repository.GetAllAsync();
+            var newListRecord = _mapper.Map<List<ProductDTO>>(listrecord);
+            return new Response<List<ProductDTO>>(newListRecord);
         }
     }
 }

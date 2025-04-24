@@ -11,6 +11,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
         public string Name { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+        public int? ColorId { get; set; }
     }
 
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response<int>>
@@ -32,7 +33,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
             record.Description = request.Description;
             record.ImageUrl = request.ImageUrl;
 
-            await _repository.CreateAsync(record);
+            await _repository.UpdateAsync(record);
             return new Response<int>(request.Id);
         }
     }

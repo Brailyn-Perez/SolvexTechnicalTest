@@ -6,7 +6,10 @@ using SolvexTechnicalTest.Core.Domain.Repositories;
 
 namespace SolvexTechnicalTest.Core.Application.Features.Product.Queries.GetProductById
 {
-    public class GetProductByIdQuery : IRequest<Response<ProductDTO>>{}
+    public class GetProductByIdQuery : IRequest<Response<ProductDTO>>
+    {
+        public int Id { get; set; }
+    }
 
     public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, Response<ProductDTO>>
     {
@@ -19,9 +22,11 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Queries.GetProdu
             _mapper = mapper;
         }
 
-        public Task<Response<ProductDTO>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+        public async Task<Response<ProductDTO>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var record = await _repository.GetByIdAsync(request.Id);
+            var newRecord = _mapper.Map<ProductDTO>(record);
+            return new Response<ProductDTO>(newRecord);
         }
     }
 }

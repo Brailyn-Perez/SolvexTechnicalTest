@@ -19,9 +19,11 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Queries.GetAllColo
             _mapper = mapper;
         }
 
-        public Task<Response<List<ColorDTO>>> Handle(GetAllColorQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<ColorDTO>>> Handle(GetAllColorQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var listRecord = await _repository.GetAllAsync();
+            var newListRecord = _mapper.Map<List<ColorDTO>>(listRecord);
+            return new Response<List<ColorDTO>>(newListRecord);
         }
     }
 }

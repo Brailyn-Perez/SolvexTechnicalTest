@@ -7,5 +7,6 @@
         Task DeleteAsync(T entity);
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
+        Task<bool> ExistsAsync(int id);
     }
 }

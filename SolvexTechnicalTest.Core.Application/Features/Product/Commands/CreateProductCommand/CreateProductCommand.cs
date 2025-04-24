@@ -10,6 +10,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.CreateP
         public string Name { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+        public int? ColorId { get; set; }
     }
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Response<int>>
