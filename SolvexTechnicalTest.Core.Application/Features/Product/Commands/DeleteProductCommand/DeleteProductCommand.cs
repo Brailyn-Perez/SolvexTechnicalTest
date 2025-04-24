@@ -21,9 +21,12 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.DeleteP
             _mapper = mapper;
         }
 
-        public Task<Response<int>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var record = await _repository.GetByIdAsync(request.Id);
+            await _repository.DeleteAsync(record);
+
+            return new Response<int>(request.Id);
         }
     }
 }

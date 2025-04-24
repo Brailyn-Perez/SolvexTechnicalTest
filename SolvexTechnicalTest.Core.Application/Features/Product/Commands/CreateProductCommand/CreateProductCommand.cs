@@ -23,9 +23,10 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.CreateP
             _mapper = mapper;
         }
 
-        public Task<Response<int>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var newRecord = _mapper.Map<Domain.Entities.Product>(request);
+            return new Response<int>(await _repository.CreateAsync(newRecord));
         }
     }
 }

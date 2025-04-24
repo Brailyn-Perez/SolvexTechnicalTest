@@ -24,9 +24,16 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
             _mapper = mapper;
         }
 
-        public Task<Response<int>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var record = await _repository.GetByIdAsync(request.Id);
+
+            record.Name = request.Name;
+            record.Description = request.Description;
+            record.ImageUrl = request.ImageUrl;
+
+            await _repository.CreateAsync(record);
+            return new Response<int>(request.Id);
         }
     }
 }

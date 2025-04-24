@@ -7,10 +7,9 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.DeleteP
         public DeleteProductCommandValidator() 
         {
             RuleFor(i => i.Id)
-                .LessThanOrEqualTo(0).WithMessage("")
-                .NotEmpty().WithMessage("")
-                .NotNull().WithMessage("");
-        
+                .NotEmpty().WithMessage("the Id canont not empty")
+                .NotNull().WithMessage("the Id canont not null");
+
         }
     }
 }
