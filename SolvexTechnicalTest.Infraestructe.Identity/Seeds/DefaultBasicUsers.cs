@@ -6,10 +6,10 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Seeds
 {
     public static class DefaultBasicUsers
     {
-        public static async Task SeedAsync(UserManager<ApplicationUser> userManager,RoleManager<IdentityRole> roleManager)
+        public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             string email = "UserBasic@gmail.com";
-            string password = "UserBasicPassword";
+            string password = "UserBasic@123";
             string userName = "UserBasic";
 
             var user = await userManager.FindByEmailAsync(email);
@@ -27,16 +27,25 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Seeds
 
                 var result = await userManager.CreateAsync(defaultUser, password);
 
-                if (result.Succeeded)
+                if (!result.Succeeded)
                 {
-                    if (!await roleManager.RoleExistsAsync(Roles.Admin.ToString()))
-                    {
-                        await roleManager.CreateAsync(new IdentityRole(Roles.Admin.ToString()));
-                    }
-
-                    await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
+                    Console.WriteLine($"Error creating user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+                    return;
                 }
+
+                if (!await roleManager.RoleExistsAsync(Roles.Admin.ToString()))
+                {
+                    var roleResult = await roleManager.CreateAsync(new IdentityRole(Roles.Admin.ToString()));
+                    if (!roleResult.Succeeded)
+                    {
+                        Console.WriteLine($"Error creating role: {string.Join(", ", roleResult.Errors.Select(e => e.Description))}");
+                        return;
+                    }
+                }
+
+                await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
             }
         }
+
     }
 }
