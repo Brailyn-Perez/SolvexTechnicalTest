@@ -1,0 +1,6 @@
+@SolvexTechnicalTest.Presentation.WebApi_HostAddress = http://localhost:5049
+
+GET {{SolvexTechnicalTest.Presentation.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
