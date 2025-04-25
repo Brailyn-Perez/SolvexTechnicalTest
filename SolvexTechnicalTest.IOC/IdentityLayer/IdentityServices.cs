@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using SolvexTechnicalTest.Core.Application.Wrappers;
+using SolvexTechnicalTest.Core.Domain.Settings;
 using SolvexTechnicalTest.Infraestructe.Identity.Context;
 using SolvexTechnicalTest.Infraestructe.Identity.Entities;
 using System.Text;
@@ -76,6 +77,8 @@ namespace SolvexTechnicalTest.IOC.IdentityLayer
                     }
                 };
             });
+            services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
+
         }
     }
 }

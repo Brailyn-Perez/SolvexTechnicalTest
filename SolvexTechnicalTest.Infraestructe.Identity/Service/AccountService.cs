@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SolvexTechnicalTest.Core.Application.DTOs.Users;
 using SolvexTechnicalTest.Core.Application.Enums;
@@ -23,12 +24,12 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Service
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountService(RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, JWTSettings jwtsetting)
+        public AccountService(RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IOptions< JWTSettings> jwtsetting)
         {
             _roleManager = roleManager;
             _signInManager = signInManager;
             _userManager = userManager;
-            _jwtSettings = jwtsetting;
+            _jwtSettings = jwtsetting.Value;
         }
 
 
@@ -62,24 +63,28 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Service
             var refreshToken = GenerateRefreshToken(ipAddress);
 
             response.RefreshToken = refreshToken.Token;
-            return new Response<AuthenticationResponse>(response, $"{user.UserName}");
+            var username = string.IsNullOrEmpty(user.UserName) ? "Authenticated user" : user.UserName;
+            return new Response<AuthenticationResponse>(response, username);
+
         }
 
         public async Task<Response<string>> RegisterAsync(RegisterRequest request, string origin)
         {
-            var userWhitTheSameUserName = await _userManager.FindByNameAsync(request.Name);
+            var userWhitTheSameUserName = await _userManager.FindByNameAsync(request.FirstName);
 
             if (userWhitTheSameUserName != null)
                 throw new ApiException($"");
 
             var user = new ApplicationUser
             {
-                Email = request.Email,
+                FirstName = request.FirstName,
                 LastName = request.LastName,
+                Email = request.Email,
                 UserName = request.UserName,
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
+
 
             var userWhitTheSameEmail = await _userManager.FindByEmailAsync(request.Email);
 
@@ -95,8 +100,11 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Service
                 }
                 else
                 {
-                    throw new ApiException($"{result.Errors}");
+                    var errorDescriptions = result.Errors.Select(e => e.Description);
+                    var errorMessage = string.Join("; ", errorDescriptions);
+                    throw new ApiException(errorMessage);
                 }
+
             }
 
 

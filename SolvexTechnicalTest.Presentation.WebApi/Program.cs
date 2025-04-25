@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using SolvexTechnicalTest.Infraestructe.Identity.Context;
 using SolvexTechnicalTest.Infraestructe.Identity.Entities;
 using SolvexTechnicalTest.Infraestructe.Identity.Seeds;
 using SolvexTechnicalTest.IOC.ApplicationLayer;
