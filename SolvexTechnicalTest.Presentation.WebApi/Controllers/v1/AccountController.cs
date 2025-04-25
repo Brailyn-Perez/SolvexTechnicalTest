@@ -5,8 +5,7 @@ using SolvexTechnicalTest.Core.Application.Features.Authenticate.Command.Registe
 
 namespace SolvexTechnicalTest.Presentation.WebApi.Controllers.v1
 {
-    [Route("Api/[Controller]")]
-    [ApiController]
+    [ApiVersion("1.0")]
     public class AccountController : BaseApiController
     {
         [HttpPost("Authenticate")]
