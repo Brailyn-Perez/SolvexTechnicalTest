@@ -31,10 +31,6 @@ namespace SolvexTechnicalTest.Infraestructure.Persistence.Configuration
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
 
-            builder.HasMany(c => c.Products)
-                .WithOne(p => p.Color)
-                .HasForeignKey(p => p.ColorId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

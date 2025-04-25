@@ -28,9 +28,6 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
                 .MinimumLength(0).WithMessage("the minimum is 0 characters")
                 .ValidImageUrl();
 
-            RuleFor(x => x.ColorId)
-                .MustAsync(async (colorId, ct) => await colorReadService.ExistsAsync((int)colorId, ct))
-                .WithMessage("The specified color does not exist.");
         }
     }
 }

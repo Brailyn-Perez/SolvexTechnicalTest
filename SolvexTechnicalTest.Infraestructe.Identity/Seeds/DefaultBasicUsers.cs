@@ -43,7 +43,7 @@ namespace SolvexTechnicalTest.Infraestructe.Identity.Seeds
                     }
                 }
 
-                await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());
+                await userManager.AddToRoleAsync(defaultUser, Roles.User.ToString());
             }
         }
 

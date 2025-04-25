@@ -25,13 +25,11 @@ namespace SolvexTechnicalTest.Infraestructure.Persistence.Configuration
             builder.Property(p => p.ImageUrl)
                 .HasMaxLength(250);
 
-            builder.Property(p => p.ColorId)
-                .IsRequired(false);
+            builder.HasMany(p => p.Colors)
+                    .WithOne(c => c.Product)
+                    .HasForeignKey(c => c.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(p => p.Color)
-                .WithMany()
-                .HasForeignKey(p => p.ColorId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

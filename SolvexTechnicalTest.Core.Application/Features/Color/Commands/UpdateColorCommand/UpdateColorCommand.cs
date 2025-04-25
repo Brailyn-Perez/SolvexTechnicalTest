@@ -8,6 +8,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.UpdateCol
     public class UpdateColorCommand : IRequest<Response<int>>
     {
         public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public string HexCode { get; set; }
         public decimal Price { get; set; }

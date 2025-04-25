@@ -24,6 +24,8 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.CreateCol
                 .NotEmpty().WithMessage("the price cannot be empty")
                 .NotNull().WithMessage("the price cannot be null");
 
+            RuleFor(i => i.ProductId);
+
         }
     }
 }

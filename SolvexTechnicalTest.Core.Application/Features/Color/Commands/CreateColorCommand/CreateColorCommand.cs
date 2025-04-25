@@ -7,9 +7,11 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.CreateCol
 {
     public class CreateColorCommand : IRequest<Response<int>>
     {
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public string HexCode { get; set; }
         public decimal Price { get; set; }
+
     }
 
     public class CreateColorCommandHandler : IRequestHandler<CreateColorCommand, Response<int>>

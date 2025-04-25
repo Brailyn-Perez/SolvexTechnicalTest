@@ -1,8 +1,7 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 using SolvexTechnicalTest.Core.Application.Common;
 using SolvexTechnicalTest.Core.Application.Interfaces.Services.ReadsServices;
-using SolvexTechnicalTest.Core.Application.Services;
+
 
 namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.CreateProductCommand
 {
@@ -24,10 +23,6 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.CreateP
                 .MaximumLength(250).WithMessage("the maximum is 250 characters")
                 .MinimumLength(0).WithMessage("the minimum is 0 characters")
                 .ValidImageUrl();
-
-            RuleFor(x => x.ColorId)
-                .MustAsync(async (colorId,ct) => await colorReadService.ExistsAsync((int)colorId, ct))
-                .WithMessage("The specified color does not exist.");
 
         }
     }

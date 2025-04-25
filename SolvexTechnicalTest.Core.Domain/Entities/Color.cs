@@ -8,6 +8,7 @@ namespace SolvexTechnicalTest.Core.Domain.Entities
         public decimal Price { get; set; }
         public string HexCode { get; set; }
 
-        public IEnumerable<Product> Products { get; set; } = new List<Product>();
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateProductCommand;
 using SolvexTechnicalTest.Core.Application.Wrappers;
 using SolvexTechnicalTest.Core.Domain.Repositories;
 
@@ -10,8 +11,7 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
         public int Id { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public string? ImageUrl { get; set; }
-        public int? ColorId { get; set; }
+        public string? ImageUrl { get; set; }}
     }
 
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response<int>>
@@ -37,4 +37,3 @@ namespace SolvexTechnicalTest.Core.Application.Features.Product.Commands.UpdateP
             return new Response<int>(request.Id);
         }
     }
-}

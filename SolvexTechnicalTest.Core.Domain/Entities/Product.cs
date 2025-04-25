@@ -8,7 +8,6 @@ namespace SolvexTechnicalTest.Core.Domain.Entities
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
 
-        public int? ColorId { get; set; }
-        public Color? Color { get; set; }
+        public IEnumerable<Color> Colors { get; set; } = new List<Color>();
     }
 }
