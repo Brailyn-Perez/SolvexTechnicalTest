@@ -28,7 +28,10 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.UpdateCol
                 .NotEmpty().WithMessage("the price cannot be empty")
                 .NotNull().WithMessage("the price cannot be null");
 
-            RuleFor(i => i.ProductId);
+            RuleFor(i => i.ProductId)
+                .NotEmpty().WithMessage("the ProductId cannot be empty")
+                .NotNull().WithMessage("the ProductId cannot be null")
+                .GreaterThan(0).WithMessage("the ProductId must be greater than 0");
         }
     }
 }

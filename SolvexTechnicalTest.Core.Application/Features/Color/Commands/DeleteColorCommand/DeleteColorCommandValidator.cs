@@ -8,7 +8,8 @@ namespace SolvexTechnicalTest.Core.Application.Features.Color.Commands.DeleteCol
         {
             RuleFor(i => i.Id)
                 .NotEmpty().WithMessage("the Id cannot be empty")
-                .NotNull().WithMessage("the Id cannot be null");
+                .NotNull().WithMessage("the Id cannot be null")
+                .GreaterThan(0).WithMessage("the Id must be greater than 0");
 
         }
     }
